@@ -1,16 +1,19 @@
 import React from "react";
 import Logo from "./Logo";
 import { GrSearch } from "react-icons/gr";
-import { FaUserCircle } from "react-icons/fa";
+import { FaRegCircleUser } from "react-icons/fa6";
 import { FaShoppingCart } from "react-icons/fa";
+import { Link } from "react-router-dom";
 
 const Header = () => {
   return (
-    <header className="h-16 shadow-md">
+    <header className="h-16 shadow-md bg-white">
       <div className="h-full container mx-auto flex items-center px-4 justify-between gap-4">
         {/* Logo Section */}
         <div>
-          <Logo w={100} h={50} />
+          <Link to={"/"}>
+            <Logo w={100} h={50} />
+          </Link>
         </div>
 
         {/* Search Section */}
@@ -26,9 +29,9 @@ const Header = () => {
         </div>
 
         {/* User Icons and Cart Section */}
-        <div className="flex items-center gap-6">
+        <div className="flex items-center gap-8">
           <div className="text-3xl cursor-pointer">
-            <FaUserCircle />
+            <FaRegCircleUser />
           </div>
           <div className="text-2xl cursor-pointer relative">
             <span>
@@ -37,6 +40,14 @@ const Header = () => {
             <div className="bg-red-600 text-white w-5 h-5 rounded-full flex items-center justify-center absolute -top-2 -right-3">
               <p className="text-xs">0</p>
             </div>
+          </div>
+          <div>
+            <Link
+              to={"/login"}
+              className="px-3 py-1 rounded-full text-white bg-red-600 hover:bg-red-700"
+            >
+              Login
+            </Link>
           </div>
         </div>
       </div>
