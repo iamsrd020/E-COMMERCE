@@ -3,9 +3,30 @@ import loginIcons from "../assest/signin.gif";
 import { FaEye } from "react-icons/fa";
 import { FaEyeSlash } from "react-icons/fa";
 import { Link } from "react-router-dom";
+
 const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
-  
+  const [data, setData] = useState({
+    email: "",
+    password: "",
+  });
+
+  const handleOnChange = (e) => {
+    const { name, value } = e.target;
+
+    setData((preve) => {
+      return {
+        ...preve,
+        [name]: value,
+      };
+    });
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+  };
+
+  console.log("Data login", data);
 
   return (
     <section id="login">
@@ -15,13 +36,16 @@ const Login = () => {
             <img src={loginIcons} alt="login icon" />
           </div>
 
-          <form className="pt-6">
+          <form className="pt-6 flex flex-col gap-2" onSubmit={handleSubmit}>
             <div className="grid">
               <label>Email:</label>
               <div className="bg-slate-100 p-2">
                 <input
                   type="email"
                   placeholder="Enter your email"
+                  name="email"
+                  value={data.email}
+                  onChange={handleOnChange}
                   className="w-full h-full outline-none bg-transparent"
                 />
               </div>
@@ -33,6 +57,9 @@ const Login = () => {
                 <input
                   type={showPassword ? "text" : "password"}
                   placeholder="Enter Password"
+                  value={data.password}
+                  name="password"
+                  onChange={handleOnChange}
                   className="w-full h-full outline-none bg-transparent"
                 />
                 <div
