@@ -5,6 +5,13 @@ async function userSignUpController(req, res) {
   try {
     const { email, password, name } = req.body;
 
+    const user = await userModel.findOne({ email });
+    console.log("user", user);
+
+    if (user) {
+      throw new Error("Already user exists");
+    }
+
     if (!email) {
       throw new Error("Please enter your email address");
     }
@@ -35,7 +42,7 @@ async function userSignUpController(req, res) {
     });
   } catch (err) {
     res.status(500).json({
-      message: err.message,
+      message: err.message || err,
       error: true,
       success: false,
     });
