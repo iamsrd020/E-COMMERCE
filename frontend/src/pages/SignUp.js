@@ -4,6 +4,7 @@ import { FaEye } from "react-icons/fa";
 import { FaEyeSlash } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import imageTobase64 from "../helpers/imageTobase64";
+import SummaryApi from "../common";
 
 const SignUp = () => {
   const [showPassword, setShowPassword] = useState(false);
@@ -40,8 +41,24 @@ const SignUp = () => {
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+
+    if (data.password === data.confirmPassword) {
+      console.log("SummaryApi.signUP.url", SummaryApi.signUP.url);
+      const dataResponse = await fetch("http://localhost:8080/api/signup", {
+        method: SummaryApi.signUP.method,
+        headers: {
+          "content-type": "application/json",
+        },
+        body: JSON.stringify(data),
+      });
+
+      const dataApi = await dataResponse.json();
+      console.log("data", dataApi);
+    } else {
+      console.log("The conform password does not match the password");
+    }
   };
 
   console.log("Data login", data);
